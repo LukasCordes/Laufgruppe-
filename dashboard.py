@@ -47,11 +47,14 @@ st.markdown("""
 @st.cache_data
 def load_data(path):
     runners_df = pd.read_excel(path, sheet_name="Läufer")
-    times_df   = pd.read_excel(path, sheet_name="Zeiten", header=0, skiprows=1)
-    times_df.columns = ["Datum", "Name", "Zeit", "Anmerkung"]
-    times_df = times_df.dropna(subset=["Name", "Zeit"])
+    times_df = pd.read_excel(path, sheet_name="Zeiten", index_col=0)
 
-    # Zeit (mm:ss String) → Sekunden
+    # Wide → Long Format umwandeln
+    times_df = times_df.reset_index()
+    times_df = times_df.melt(id_vars="Name", var_name="Datum", value_name="Zeit")
+    times_df = times_df.dropna(subset=["Zeit"])
+
+    # Zeit parsen (bleibt gleich)
     def parse_time(t):
         try:
             t = str(t).strip()
@@ -66,7 +69,6 @@ def load_data(path):
     times_df = times_df.dropna(subset=["Sekunden"])
     times_df["Sekunden"] = times_df["Sekunden"].astype(int)
 
-    # Datum parsen
     times_df["Datum"] = pd.to_datetime(times_df["Datum"], dayfirst=True, errors="coerce")
     times_df = times_df.dropna(subset=["Datum"])
     times_df = times_df.sort_values("Datum")
