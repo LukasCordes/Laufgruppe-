@@ -15,7 +15,7 @@ st.set_page_config(
 # ── Custom CSS ──────────────────────────────────────────────────
 st.markdown("""
 <style>
-    .main { background-color: #F8FAFC; }
+    .main { background-color: #E6F4F1; }
     .podium-card {
         background: white;
         border-radius: 16px;
@@ -35,7 +35,7 @@ st.markdown("""
         text-align: center;
     }
     .stSelectbox label { font-weight: 600; }
-    h1 { color: #1E3A5F !important; }
+    h1 { color: #00697A !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -97,8 +97,8 @@ attendance = attendance.sort_values("Läufe", ascending=False)
 #  SIDEBAR
 # ══════════════════════════════════════════════════════
 with st.sidebar:
-    st.image("https://img.icons8.com/emoji/96/running-shoe.png", width=60)
-    st.title("Laufgruppe")
+    st.image("Logo.png", width=60)
+    st.title("FBC München")
     st.markdown("---")
     page = st.radio("Navigation", ["🏆 Podium & Übersicht", "👤 Einzelne Läufer"])
     st.markdown("---")
@@ -137,7 +137,7 @@ if page == "🏆 Podium & Übersicht":
     ]
 
     # Podium-Layout: 2 | 1 | 3
-    order = [1, 0, 2] if len(top3) >= 3 else list(range(len(top3)))
+    order = [0, 1, 2] if len(top3) >= 3 else list(range(len(top3)))
     heights = ["120px", "160px", "100px"]
 
     cols = st.columns(3)
