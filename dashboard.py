@@ -97,7 +97,7 @@ attendance = attendance.sort_values("Läufe", ascending=False)
 #  SIDEBAR
 # ══════════════════════════════════════════════════════
 with st.sidebar:
-    st.image("Logo.png", width=60)
+    st.image("Logo.png", width=100)
     st.title("FBC München")
     st.markdown("---")
     page = st.radio("Navigation", ["🏆 Podium & Übersicht", "👤 Einzelne Läufer"])
