@@ -36,7 +36,9 @@ st.markdown("""
     }
     .stSelectbox label { font-weight: 600; }
     h1 { color: #00697A !important; }
-    .sidebar .sidebar-content { background-color: white; }
+    [data-testid="stSidebar"] {
+    background-color: white !important;
+    }   
 </style>
 """, unsafe_allow_html=True)
 
